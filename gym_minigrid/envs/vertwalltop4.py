@@ -359,6 +359,15 @@ class GridworldVertWallTop4(VertWallTop4Env):
         )
 
 
+class GridworldVertWallTop41(VertWallTop4Env):
+    def __init__(self):
+        super().__init__(
+            size=12,
+            goal_pos=dict(x=10, y=10),
+            show_goal=True,
+        )
+
+
 class GridworldVertWallTop4NoGoalVis(VertWallTop4Env):
     def __init__(self):
         super().__init__(
@@ -421,6 +430,11 @@ class GridworldVertWallTop4_20x20(VertWallTop4Env):
 register(
     id="MiniGrid-Gridworld-VertWallTop4-v0",
     entry_point="gym_minigrid.envs:GridworldVertWallTop4",
+)
+
+register(
+    id="MiniGrid-Gridworld-VertWallTop41-v0",
+    entry_point="gym_minigrid.envs:GridworldVertWallTop41",
 )
 
 register(
