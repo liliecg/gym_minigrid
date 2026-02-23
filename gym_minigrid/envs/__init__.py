@@ -35,5 +35,6 @@ from .vertwallbottom1 import *
 from .vertwallbottom2 import *
 from .vertwallbottom3 import *
 from .vertwallbottom4 import *
+from .vertwallbottom4nolava import *
 from .vertwallbottom5 import *
 from .wallholecenter import *
