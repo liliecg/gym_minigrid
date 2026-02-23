@@ -28,6 +28,7 @@ from .vertwalltop2 import *
 from .vertwalltop3 import *
 from .vertwalltop4 import *
 from .vertwalltop5 import *
+from .vertwalltop5nolava import *
 from .vertwalltop6 import *
 from .vertwalltop7 import *
 from .vertwallbottom1 import *
