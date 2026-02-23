@@ -7,7 +7,7 @@ Customize environment for my project
 """
 
 
-class VertWallTop5Env(MiniGridEnv):
+class VertWallTop5EnvNoLava(MiniGridEnv):
     """
     A 5x5 version of vertwalltop4 environment without lava tiles.
     """
@@ -250,7 +250,7 @@ class VertWallTop5Env(MiniGridEnv):
         )
 
 
-class GridworldVertWallTop5(VertWallTop5Env):
+class GridworldVertWallTop5NoLava(VertWallTop5EnvNoLava):
     def __init__(self):
         super().__init__(
             size=7,
@@ -259,21 +259,11 @@ class GridworldVertWallTop5(VertWallTop5Env):
         )
 
 
-class GridworldVertWallTop5NoGoalVis(VertWallTop5Env):
-    def __init__(self):
-        super().__init__(
-            size=7,
-            goal_pos=dict(x=1, y=1),
-            show_goal=False,
-        )
+
 
 
 register(
-    id="MiniGrid-Gridworld-VertWallTop5-v0",
-    entry_point="gym_minigrid.envs:GridworldVertWallTop5",
+    id="MiniGrid-Gridworld-VertWallTop5NoLava-v0",
+    entry_point="gym_minigrid.envs:GridworldVertWallTop5NoLava",
 )
 
-register(
-    id="MiniGrid-Gridworld-VertWallTop5-NoGoalVis-v0",
-    entry_point="gym_minigrid.envs:GridworldVertWallTop5NoGoalVis",
-)
