@@ -212,7 +212,7 @@ class VertWallBottom4EnvNoLava(MiniGridEnv):
                 # get a random color for the floor using self.obstacles_coverage_colors and self.rng
                 self.put_obj(Floor(self.obstacles_colors[idx]), x, y)
 
-        else:
+        #else:
             # Add lava on the right side of the environment
             #self.put_obj(Lava(), 4, 2)
 
