@@ -325,9 +325,20 @@ class GridworldVertWallBottom4NoLava(VertWallBottom4EnvNoLava):
             show_goal=True,
         )
 
-
+class GridworldVertWallBottom4NoLava10(VertWallBottom4EnvNoLava):
+    def __init__(self):
+        super().__init__(
+            size=12,
+            goal_pos=dict(x=10, y=10),
+            show_goal=True,
+        )
 
 register(
     id="MiniGrid-Gridworld-VertWallBottom4NoLava-v0",
     entry_point="gym_minigrid.envs:GridworldVertWallBottom4NoLava",
+)
+
+register(
+    id="MiniGrid-Gridworld-VertWallBottom4NoLava-v010",
+    entry_point="gym_minigrid.envs:GridworldVertWallBottom4NoLava10",
 )
