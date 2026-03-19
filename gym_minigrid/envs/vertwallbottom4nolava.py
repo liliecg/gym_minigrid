@@ -339,6 +339,6 @@ register(
 )
 
 register(
-    id="MiniGrid-Gridworld-VertWallBottom4NoLava-v010",
+    id="MiniGrid-Gridworld-VertWallBottom4NoLava-v10",
     entry_point="gym_minigrid.envs:GridworldVertWallBottom4NoLava10",
 )
