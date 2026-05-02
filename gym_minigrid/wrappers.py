@@ -357,3 +357,50 @@ class DirectionObsWrapper(gym.core.ObservationWrapper):
         )
         obs["goal_direction"] = np.arctan(slope) if self.type == "angle" else slope
         return obs
+
+
+class CardinalActionWrapper(gym.Wrapper):
+    """
+    Replaces the ego-centric (turn/forward) action space with 4 cardinal actions:
+      0 = move right  (+x)
+      1 = move down   (+y)
+      2 = move left   (-x)
+      3 = move up     (-y)
+    The agent's facing direction is ignored and unchanged.
+    """
+
+    _DELTAS = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+
+    def __init__(self, env):
+        super().__init__(env)
+        self.action_space = spaces.Discrete(4)
+
+    def step(self, action):
+        assert 0 <= action < 4, f"Invalid cardinal action: {action}"
+        dx, dy = self._DELTAS[action]
+
+        env = self.unwrapped
+        env.step_count += 1
+
+        new_pos = (env.agent_pos[0] + dx, env.agent_pos[1] + dy)
+        fwd_cell = env.grid.get(*new_pos)
+
+        reward = 0.0
+        terminated = False
+        truncated = False
+
+        if fwd_cell is None or fwd_cell.can_overlap():
+            env.agent_pos = new_pos
+        if fwd_cell is not None and fwd_cell.type == "goal":
+            terminated = True
+            reward = env._reward()
+        if fwd_cell is not None and fwd_cell.type == "lava":
+            terminated = True
+
+        if env.step_count >= env.max_steps:
+            truncated = True
+
+        obs = env.gen_obs()
+        return obs, reward, terminated, truncated, {
+            "agent_pos": env.agent_pos, "agent_dir": env.agent_dir
+        }
