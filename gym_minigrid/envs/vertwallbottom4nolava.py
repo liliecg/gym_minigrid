@@ -342,6 +342,13 @@ class GridworldVertWallBottom4NoLavaCardinal(CardinalActionWrapper):
         super().__init__(GridworldVertWallBottom4NoLava())
 
 
+class GridworldVertWallBottom4NoLava10Cardinal(CardinalActionWrapper):
+    """Cardinal version of the 12x12 variant."""
+
+    def __init__(self):
+        super().__init__(GridworldVertWallBottom4NoLava10())
+
+
 register(
     id="MiniGrid-Gridworld-VertWallBottom4NoLava-v0",
     entry_point="gym_minigrid.envs:GridworldVertWallBottom4NoLava",
@@ -355,4 +362,9 @@ register(
 register(
     id="MiniGrid-Gridworld-VertWallBottom4NoLava-Cardinal-v0",
     entry_point="gym_minigrid.envs:GridworldVertWallBottom4NoLavaCardinal",
+)
+
+register(
+    id="MiniGrid-Gridworld-VertWallBottom4NoLava-Cardinal-v10",
+    entry_point="gym_minigrid.envs:GridworldVertWallBottom4NoLava10Cardinal",
 )
