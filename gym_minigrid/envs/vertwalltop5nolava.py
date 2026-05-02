@@ -1,5 +1,6 @@
 from gym_minigrid.minigrid import *
 from gym_minigrid.register import register
+from gym_minigrid.wrappers import CardinalActionWrapper
 import itertools as itt
 
 """
@@ -259,11 +260,21 @@ class GridworldVertWallTop5NoLava(VertWallTop5EnvNoLava):
         )
 
 
+class GridworldVertWallTop5NoLavaCardinal(CardinalActionWrapper):
+    """Cardinal (right/down/left/up) version — 4 direct-movement actions, no direction state."""
+
+    def __init__(self):
+        super().__init__(GridworldVertWallTop5NoLava())
 
 
 
 register(
     id="MiniGrid-Gridworld-VertWallTop5NoLava-v0",
     entry_point="gym_minigrid.envs:GridworldVertWallTop5NoLava",
+)
+
+register(
+    id="MiniGrid-Gridworld-VertWallTop5NoLava-Cardinal-v0",
+    entry_point="gym_minigrid.envs:GridworldVertWallTop5NoLavaCardinal",
 )
 
