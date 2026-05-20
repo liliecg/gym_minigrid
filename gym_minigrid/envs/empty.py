@@ -1,5 +1,6 @@
 from gym_minigrid.minigrid import *
 from gym_minigrid.register import register
+from gym_minigrid.wrappers import CardinalActionWrapper
 
 
 class EmptyEnv(MiniGridEnv):
@@ -300,4 +301,17 @@ register(
 register(
     id="MiniGrid-Empty-Random-NoGoalVis-env2-v0",
     entry_point="gym_minigrid.envs:EmptyRandomNoGoalVisEnv2",
+)
+
+
+class EmptyRandomEnv2Cardinal(CardinalActionWrapper):
+    """Cardinal (right/down/left/up) version of EmptyRandomEnv2: 12x12 grid, random start, goal at (10,10)."""
+
+    def __init__(self):
+        super().__init__(EmptyRandomEnv2())
+
+
+register(
+    id="MiniGrid-Empty-Random-env2-Cardinal-v0",
+    entry_point="gym_minigrid.envs:EmptyRandomEnv2Cardinal",
 )
