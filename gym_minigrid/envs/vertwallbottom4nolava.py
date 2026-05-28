@@ -368,3 +368,32 @@ register(
     id="MiniGrid-Gridworld-VertWallBottom4NoLava-Cardinal-v10",
     entry_point="gym_minigrid.envs:GridworldVertWallBottom4NoLava10Cardinal",
 )
+
+
+class GridworldVertWallBottom4NoLavaGoalTopLeft(VertWallBottom4EnvNoLava):
+    """Same as v10 (12x12) but goal at top-left (x=1, y=1)."""
+
+    def __init__(self):
+        super().__init__(
+            size=12,
+            goal_pos=dict(x=1, y=1),
+            show_goal=True,
+        )
+
+
+class GridworldVertWallBottom4NoLavaGoalTopLeftCardinal(CardinalActionWrapper):
+    """Cardinal version of GoalTopLeft."""
+
+    def __init__(self):
+        super().__init__(GridworldVertWallBottom4NoLavaGoalTopLeft())
+
+
+register(
+    id="MiniGrid-Gridworld-VertWallBottom4NoLava-GoalTopLeft-v10",
+    entry_point="gym_minigrid.envs:GridworldVertWallBottom4NoLavaGoalTopLeft",
+)
+
+register(
+    id="MiniGrid-Gridworld-VertWallBottom4NoLava-GoalTopLeft-Cardinal-v10",
+    entry_point="gym_minigrid.envs:GridworldVertWallBottom4NoLavaGoalTopLeftCardinal",
+)
