@@ -1,5 +1,6 @@
 from gym_minigrid.minigrid import *
 from gym_minigrid.register import register
+from gym_minigrid.wrappers import CardinalActionWrapper
 
 import itertools as itt
 
@@ -454,6 +455,19 @@ register(
 register(
     id="MiniGrid-GridworldTwoLWalls-GoalRight-v0",
     entry_point="gym_minigrid.envs:GridworldTwoLWallsGoalRight",
+)
+
+
+class GridworldTwoLWallsGoalRightCardinal(CardinalActionWrapper):
+    """Cardinal version of TwoLWalls with goal on the right."""
+
+    def __init__(self):
+        super().__init__(GridworldTwoLWallsGoalRight())
+
+
+register(
+    id="MiniGrid-GridworldTwoLWalls-GoalRight-Cardinal-v0",
+    entry_point="gym_minigrid.envs:GridworldTwoLWallsGoalRightCardinal",
 )
 
 register(
