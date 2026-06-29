@@ -26,8 +26,10 @@ class TwoLWalls(MiniGridEnv):
         goal_pos = None,
         max_steps: int = None,
         show_goal: bool = True,
+        no_lava: bool = False,
     ):
         self.obstacle_type = obstacle_type
+        self.no_lava = no_lava
         self.size = size
         self.agent_start_pos = agent_start_pos
         self.agent_start_dir = agent_start_dir
@@ -137,7 +139,7 @@ class TwoLWalls(MiniGridEnv):
         for (x, y) in self.obstacles:
             self.put_obj(self.obstacle_type(), x, y)
 
-        if self.size <= 12:
+        if self.size <= 12 and not self.no_lava:
             # Add lava on the left side of the environment
             self.put_obj(Lava(), 2, 4)
             self.put_obj(Lava(), 2, 5)
@@ -223,7 +225,7 @@ class TwoLWalls(MiniGridEnv):
         for (x, y) in self.obstacles:
             self.put_obj(self.obstacle_type(), x, y)
 
-        if self.size <= 12:
+        if self.size <= 12 and not self.no_lava:
             # Add lava on the left side of the environment
             self.put_obj(Lava(), 2, 4)
             self.put_obj(Lava(), 2, 5)
@@ -302,7 +304,7 @@ class TwoLWalls(MiniGridEnv):
             if fwd_cell is not None and fwd_cell.type == "goal":
                 terminated = True
                 reward = self._reward()
-            if fwd_cell is not None and fwd_cell.type == "lava":
+            if fwd_cell is not None and fwd_cell.type == "lava" and not self.no_lava:
                 terminated = True
 
         # Pick up an object
@@ -499,4 +501,34 @@ register(
 register(
     id="MiniGrid-GridworldTwoLWalls-NoGoalVis-GoalLeftAndRight-v0",
     entry_point="gym_minigrid.envs:GridworldTwoLWallsNoGoalVisGoalLeftAndRight",
+)
+
+
+class GridworldTwoLWallsGoalRightNoLava(TwoLWalls):
+    def __init__(self):
+        super().__init__(
+            size=12,
+            env_id=7,
+            goal_pos=[dict(x=10, y=6)],
+            max_steps=10000,
+            show_goal=True,
+            no_lava=True,
+        )
+
+
+class GridworldTwoLWallsGoalRightNoLavaCardinal(CardinalActionWrapper):
+    """Cardinal version of TwoLWalls GoalRight with no lava tiles."""
+
+    def __init__(self):
+        super().__init__(GridworldTwoLWallsGoalRightNoLava())
+
+
+register(
+    id="MiniGrid-GridworldTwoLWalls-GoalRight-NoLava-v0",
+    entry_point="gym_minigrid.envs:GridworldTwoLWallsGoalRightNoLava",
+)
+
+register(
+    id="MiniGrid-GridworldTwoLWalls-GoalRight-NoLava-Cardinal-v0",
+    entry_point="gym_minigrid.envs:GridworldTwoLWallsGoalRightNoLavaCardinal",
 )
