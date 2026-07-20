@@ -532,3 +532,33 @@ register(
     id="MiniGrid-GridworldTwoLWalls-GoalRight-NoLava-Cardinal-v0",
     entry_point="gym_minigrid.envs:GridworldTwoLWallsGoalRightNoLavaCardinal",
 )
+
+
+class GridworldTwoLWallsGoalLeftNoLava(TwoLWalls):
+    def __init__(self):
+        super().__init__(
+            size=12,
+            env_id=7,
+            goal_pos=[dict(x=1, y=6)],
+            max_steps=10000,
+            show_goal=True,
+            no_lava=True,
+        )
+
+
+class GridworldTwoLWallsGoalLeftNoLavaCardinal(CardinalActionWrapper):
+    """Cardinal version of TwoLWalls GoalLeft with no lava tiles."""
+
+    def __init__(self):
+        super().__init__(GridworldTwoLWallsGoalLeftNoLava())
+
+
+register(
+    id="MiniGrid-GridworldTwoLWalls-GoalLeft-NoLava-v0",
+    entry_point="gym_minigrid.envs:GridworldTwoLWallsGoalLeftNoLava",
+)
+
+register(
+    id="MiniGrid-GridworldTwoLWalls-GoalLeft-NoLava-Cardinal-v0",
+    entry_point="gym_minigrid.envs:GridworldTwoLWallsGoalLeftNoLavaCardinal",
+)
